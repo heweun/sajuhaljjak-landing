@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사주활짝 - AI 사주상담</title>
+    <!-- Open Graph Meta Tags for Link Preview -->
+    <meta property="og:title" content="사주활짝 - AI 사주상담">
+    <meta property="og:description" content="이름과 생년월일만으로도, 당신의 고민을 알아채는 AI 사주 전문가">
+    <meta property="og:image" content="https://startling-genie-0e09e6.netlify.app/realmain.png">
+    <meta property="og:url" content="https://startling-genie-0e09e6.netlify.app/">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="YeojuCeramic.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #9747FF;
+            --secondary-color: #7B3FD4;
+            --accent-color: #E8D1FF;
+            --text-color: #333;
+            --background-color: #FFFFFF;
+        }
+
+        body {
+            font-family: 'YeojuCeramic', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: white;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 32px;
+            src: "logo.png";
+            alt: "사주활짝 로고";
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .main-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F9F5FF 0%, #E8D1FF 100%);
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding: 4rem 2rem;
+        }
+
+        .text-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #F1948A;
+            word-break: keep-all;
+        }
+
+        .sub-title {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #4A4A58;
+            word-break: keep-all;
+        }
+
+        .app-download {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .store-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 0.8rem;
+            border-radius: 12px;
+            background: #000;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .store-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .store-button img[alt="Google Play"] {
+            width: 150px;
+            height: 70px;
+        }
+
+        .store-button img[alt="App Store"] {
+            height: 50px;
+            width: auto;
+        }
+
+        .app-preview {
+            flex: 1;
+            position: relative;
+            display: flex;
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .app-screenshot {
+            width: 240px;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(151, 71, 255, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-preview img:first-child {
+            transform: rotate(-5deg);
+            z-index: 2;
+        }
+
+        .app-preview img:last-child {
+            transform: rotate(5deg);
+            margin-left: -50px;
+        }
+
+        .app-preview:hover img:first-child {
+            transform: rotate(-5deg) translateY(-10px);
+        }
+
+        .app-preview:hover img:last-child {
+            transform: rotate(5deg) translateY(-10px);
+        }
+
+        .app-screenshots {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 1rem 0;
+            overflow-x: auto;
+            padding: 1rem;
+        }
+
+        .screenshot-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .screenshot-container:nth-child(2) {
+            margin-top: 2rem;
+        }
+
+        .screenshot-container:nth-child(3) {
+            margin-top: 4rem;
+        }
+
+        .screenshot-label {
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .services-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #C3A5EF;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: #F9F5FF;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(151, 71, 255, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            font-size: 2rem;
+            color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(151, 71, 255, 0.1);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .chat-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            max-width: 800px;
+            margin: 4rem auto 0;
+            box-shadow: 0 20px 40px rgba(151, 71, 255, 0.1);
+        }
+
+        .chat-message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-bubble {
+            background: #F9F5FF;
+            padding: 1rem;
+            border-radius: 12px;
+            flex: 1;
+            max-width: 80%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .footer {
+            padding: 2rem;
+            text-align: center;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                flex-direction: column;
+                text-align: left;
+                padding: 2rem 1rem;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+                text-align: left;
+            }
+
+            .sub-title {
+                font-size: 1.2rem;
+                text-align: left;
+            }
+
+            .app-download {
+                justify-content: flex-start;
+            }
+
+            .app-preview {
+                margin-top: 2rem;
+                overflow-x: hidden;
+            }
+
+            .app-preview img:nth-child(2) {
+                display: none;
+            }
+
+            .app-screenshot {
+                width: 200px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .features-description {
+                text-align: left;
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                text-align: left;
+                padding: 0 1rem;
+            }
+
+            .app-screenshots {
+                display: flex;
+                overflow-x: scroll;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+                padding: 1rem;
+            }
+
+            .screenshot-container {
+                flex: 0 0 auto;
+                width: 80%;
+                scroll-snap-align: center;
+                margin-right: 1rem;
+            }
+
+            .screenshot-container:nth-child(2),
+            .screenshot-container:nth-child(3) {
+                margin-top: 0;
+            }
+
+            .app-screenshots::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .sub-title {
+                font-size: 1rem;
+            }
+            .app-download {
+                display: flex;
+                margin-top: 0.5rem;
+            }
+            .store-button {
+                display: inline-flex;
+                align-items: center;
+                padding: 0 0.4rem;
+                border-radius: 12px;
+                background: #000;
+                color: white;
+                text-decoration: none;
+                transition: transform 0.3s ease;
+            }
+            .app-preview {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 60px; /* 겹치니까 gap 제거 */
+                position: relative;
+                overflow: visible; /* 기본값 */
+            }
+
+            .app-screenshot {
+                width: 160px;
+                border-radius: 15px;
+                box-shadow: none;
+                transition: none;
+            }
+
+            .app-preview img:first-child {
+                position: relative;
+                z-index: 2;
+            }
+
+            .app-preview img:last-child {
+                position: relative;
+                left: -30px;
+                z-index: 1;
+            }
+            .app-preview img:nth-child(2) {
+                display: block;
+            }
+            .section-title {
+                text-align:center;
+                font-size: 1.3rem;
+                color: #C3A5EF;
+                margin-bottom: 1.5rem;
+                font-weight: bold;
+            }
+            .app-screenshots::before {
+                content: '';
+                flex: 0 0 70%;
+            }
+            .screenshot-container {
+                flex: 0 0 auto;
+                width: 50%;
+                scroll-snap-align: start;
+                margin-right: 1rem;
+            }
+            .store-button img[alt="App Store"] {
+                height: 40px;
+                width: auto;
+            }
+            .store-button img[alt="Google Play"] {
+                width: 120px;
+                height: 50px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <!-- <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="사주활짝 로고">
+        </div>
+        <nav class="nav-links">
+            <a href="#features">서비스 소개</a>
+            <a href="#about">회사 소개</a>
+        </nav>
+    </header> -->
+
+    <section class="main-section">
+        <div class="floating-elements">
+            <i class="fas fa-star floating-icon" style="top: 20%; left: 10%;"></i>
+            <i class="fas fa-moon floating-icon" style="top: 40%; right: 15%;"></i>
+            <i class="fas fa-sun floating-icon" style="bottom: 30%; left: 20%;"></i>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="text-content">
+                <h1 class="main-title">사주활짝</h1>
+                <p class="sub-title">이름과 생년월일만으로도,<br>당신의 고민을 알아채는 AI 사주 전문가</p>
+                <div class="app-download">
+                    <a href="https://play.google.com/store/apps/details?id=com.yourapp" class="store-button" target="_blank">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play">
+                    </a>
+                    <a href="#" class="store-button">
+                        <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="App Store">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="app-preview">
+                <img src="realmain.png" alt="사주활짝 앱 소개화면" class="app-screenshot">
+                <img src="main.png" alt="사주활짝 앱 메인화면" class="app-screenshot">
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="features">
+        <div class="services-container">
+            <h2 class="section-title">세 명의 AI 사주 전문가와 함께하는<br>쉽고 편안한 사주풀이</h2>
+
+            <div class="features-description" style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #4A4A58; line-height: 1.8;">
+                <p>오늘의 운세부터 1:1 심층 상담까지,<br>
+                당신의 궁금한 마음과 복잡한 고민에<br>
+                작은 힌트와 위로를 건네드립니다.</p>
+            </div>
+
+            <div class="app-screenshots">
+                <div class="screenshot-container">
+                    <img src="main.png" alt="사주활짝 메인화면" class="app-screenshot">
+                </div>
+                <div class="screenshot-container">
+                    <img src="loading.png" alt="사주활짝 로딩화면" class="app-screenshot">
+                </div>
+                <div class="screenshot-container">
+                    <img src="chat.png" alt="사주활짝 채팅화면" class="app-screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 사주활짝. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="terms.html">이용약관</a>
+        </div>
+    </footer>
+</body>
+</html> 
