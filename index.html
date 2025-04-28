@@ -499,6 +499,20 @@
                 height: 50px;
             }
             
+            /* 푸터 모바일 왼쪽정렬 및 세로배치 */
+            .footer > div {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: left !important;
+                gap: 1.2rem !important;
+                padding: 0 1rem;
+            }
+            .footer > div > div,
+            .footer > div > a {
+                min-width: unset !important;
+                text-align: left !important;
+                width: 100%;
+            }
         }
     </style>
 </head>
