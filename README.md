@@ -15,6 +15,8 @@
 - `loading.png`: 로딩 화면 이미지
 - `main.png`: 메인 이미지
 - `chat.png`: 채팅 관련 이미지
+- `web.png` : 웹 연결 링크 버튼 이미지
+- `playstore.png` : 플레이 스토어 연결 링크 버튼 이미지
 
 ## 기술 스택
 
