@@ -117,29 +117,13 @@
             margin-top: 2rem;
         }
 
-        .store-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5rem 0.8rem;
-            border-radius: 12px;
-            background: #000;
-            color: white;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-
         .store-button:hover {
             transform: translateY(-2px);
         }
 
         .store-button img[alt="Google Play"] {
-            width: 150px;
-            height: 70px;
-        }
-
-        .store-button img[alt="App Store"] {
-            height: 50px;
             width: auto;
+            height: 70px;
         }
 
         .app-preview {
@@ -434,16 +418,6 @@
                 display: flex;
                 margin-top: 0.5rem;
             }
-            .store-button {
-                display: inline-flex;
-                align-items: center;
-                padding: 0 0.4rem;
-                border-radius: 12px;
-                background: #000;
-                color: white;
-                text-decoration: none;
-                transition: transform 0.3s ease;
-            }
             .app-preview {
                 display: flex;
                 justify-content: center;
@@ -490,12 +464,8 @@
                 scroll-snap-align: start;
                 margin-right: 1rem;
             }
-            .store-button img[alt="App Store"] {
-                height: 40px;
-                width: auto;
-            }
             .store-button img[alt="Google Play"] {
-                width: 120px;
+                width: auto;
                 height: 50px;
             }
             
@@ -512,6 +482,34 @@
                 min-width: unset !important;
                 text-align: left !important;
                 width: 100%;
+            }
+            .web-app-button img {
+                height: 40px !important;
+            }
+        }
+
+        .web-app-button {
+            background: transparent !important;
+            padding: 0 !important;
+        }
+
+        .web-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #9747FF !important;
+            color: white;
+            font-size: 1rem;
+            padding: 0.8rem 1.2rem !important;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .web-button {
+                padding: 0.6rem 1rem !important;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -539,11 +537,11 @@
                 <h1 class="main-title">사주활짝</h1>
                 <p class="sub-title">이름과 생년월일만으로도,<br>당신의 고민을 알아채는 AI 사주 전문가</p>
                 <div class="app-download">
-                    <a href="https://play.google.com/store/apps/details?id=com.yourapp" class="store-button" target="_blank">
-                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play">
+                    <a href="https://play.google.com/store/apps/details?id=com.doublew.saju_app" class="store-button" target="_blank">
+                        <img src="playstore.png" alt="Google Play">
                     </a>
-                    <a href="#" class="store-button">
-                        <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="App Store">
+                    <a href="https://hwaljak.com/" class="store-button" target="_blank">
+                        <img src="web.png" alt="Google Play">
                     </a>
                 </div>
             </div>
